@@ -11,6 +11,23 @@
     }
     ul {
       padding-left: 20px;
+      margin: 0;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    .saturday {
+      color: blue;
+    }
+    .sunday {
+      color: red;
+    }
+
+    /* スマホ対応：画面幅700px以下の場合 */
+    @media screen and (max-width: 700px) {
+      body {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -18,24 +35,29 @@
   <h2>開催日</h2>
   <ul id="schedule"></ul>
 
-<script>
-  const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
-  const list = document.getElementById('schedule');
-  const today = new Date();
+  <script>
+    const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+    const list = document.getElementById('schedule');
+    const today = new Date();
 
-  for (let i = 0; i < 7; i++) {
-    const date = new Date(today);
-    date.setDate(today.getDate() + i);
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
 
-    const mm = ('0' + (date.getMonth() + 1)).slice(-2);
-    const dd = ('0' + date.getDate()).slice(-2);
-    const day = weekdays[date.getDay()];
+      const mm = date.getMonth() + 1; // 0埋めなし
+      const dd = ('0' + date.getDate()).slice(-2);
+      const dayIndex = date.getDay();
+      const day = weekdays[dayIndex];
 
-    const item = document.createElement('li');
-    item.textContent = `${mm}月${dd}日（${day}） 20:00〜22:00`;
-    list.appendChild(item);
-  }
-</script>
+      const item = document.createElement('li');
 
+      // 土日だけクラスを追加して色を変更
+      if (dayIndex === 0) item.classList.add('sunday');   // 日曜
+      if (dayIndex === 6) item.classList.add('saturday'); // 土曜
+
+      item.textContent = `${mm}月${dd}日（${day}） 20:00〜22:00`;
+      list.appendChild(item);
+    }
+  </script>
 </body>
 </html>
