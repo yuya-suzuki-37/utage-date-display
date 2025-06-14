@@ -1,27 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <title>開催日表示</title>
   <style>
     body {
-      font-size: 18px;
       font-family: sans-serif;
-      margin: 0;
-      padding: 10px;
+      font-size: 18px;
+      margin: 20px;
+    }
+    ul {
+      padding-left: 20px;
     }
   </style>
 </head>
 <body>
-  <div id="date"></div>
+  <h2>開催日（20:00〜22:00）</h2>
+  <ul id="schedule"></ul>
 
   <script>
-    const date = new Date();
-    date.setDate(date.getDate() + 7);
-    const yyyy = date.getFullYear();
-    const mm = ('0' + (date.getMonth() + 1)).slice(-2);
-    const dd = ('0' + date.getDate()).slice(-2);
-    document.getElementById('date').textContent = `次回開催日：${yyyy}年${mm}月${dd}日 20:00〜`;
+    const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+    const list = document.getElementById('schedule');
+    const today = new Date();
+
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(today);
+      date.setDate(today.getDate() + i);
+
+      const yyyy = date.getFullYear();
+      const mm = ('0' + (date.getMonth() + 1)).slice(-2);
+      const dd = ('0' + date.getDate()).slice(-2);
+      const day = weekdays[date.getDay()];
+
+      const item = document.createElement('li');
+      item.textContent = `${yyyy}年${mm}月${dd}日（${day}） 20:00〜22:00`;
+      list.appendChild(item);
+    }
   </script>
 </body>
 </html>
