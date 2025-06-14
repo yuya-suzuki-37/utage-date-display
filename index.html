@@ -18,24 +18,24 @@
   <h2>開催日（20:00〜22:00）</h2>
   <ul id="schedule"></ul>
 
-  <script>
-    const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
-    const list = document.getElementById('schedule');
-    const today = new Date();
+<script>
+  const weekdays = ['日', '月', '火', '水', '木', '金', '土'];
+  const list = document.getElementById('schedule');
+  const today = new Date();
 
-    for (let i = 0; i < 7; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
+  for (let i = 0; i < 7; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
 
-      const yyyy = date.getFullYear();
-      const mm = ('0' + (date.getMonth() + 1)).slice(-2);
-      const dd = ('0' + date.getDate()).slice(-2);
-      const day = weekdays[date.getDay()];
+    const mm = ('0' + (date.getMonth() + 1)).slice(-2);
+    const dd = ('0' + date.getDate()).slice(-2);
+    const day = weekdays[date.getDay()];
 
-      const item = document.createElement('li');
-      item.textContent = `${yyyy}年${mm}月${dd}日（${day}） 20:00〜22:00`;
-      list.appendChild(item);
-    }
-  </script>
+    const item = document.createElement('li');
+    item.textContent = `${mm}月${dd}日（${day}） 20:00〜22:00`;
+    list.appendChild(item);
+  }
+</script>
+
 </body>
 </html>
